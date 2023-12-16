@@ -20,6 +20,10 @@ To install the project dependencies, run the following command in the terminal f
 
 `npm install`
 
+then
+
+`npm install --save-dev @types/crypto-js`
+
 
 ## Running unit tests
 
