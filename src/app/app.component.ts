@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { DashboardPokemonUseCase } from './core/usescases/dashboardPokemon/dashboardPokemon.usecase';
+import { ResponsePokeEntity } from './data/dashboardPokemon/dashboardPokemon.web-entity';
+import { HttpErrorResponseStatus } from './presentation/core/config/http-error-response-status.type';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +9,15 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'pokeApp';
+
+  constructor(){}
+
+  ngOnInit(): void {
+
+
+
 }
+
+}
+
+

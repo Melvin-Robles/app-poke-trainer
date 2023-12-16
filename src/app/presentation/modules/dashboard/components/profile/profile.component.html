@@ -1,0 +1,155 @@
+<div class="profile__header">
+  <div class="profile__btn--back">
+    <img src="assets/img/svg/arrow_back.svg" alt="" />
+    <div
+      style="
+        width: 550px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      "
+      class="o-font-size--title o-font-family--poppins-bold"
+    >
+      <div style="color: var(--black)" class="o-font-family--poppins-Extrabold">
+        {{ "¡Hola! " + userName }}
+      </div>
+      <div class="profile__btn--edit">
+        <img src="assets/img/svg/edit.svg" alt="" />
+        <button (click)="goToConfigure()" class="o-font-family--poppins-bold">
+          Editar perfil
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="profile__main">
+  <div class="profile__card">
+    <div
+      class="profile__card--title o-font-family--poppins o-font-size--sub-title"
+    >
+      <div>Entrenador</div>
+      <div>
+        <img src="assets\img\png\trainer.png" alt="" />
+      </div>
+    </div>
+    <div class="profile__card--img">
+      <img
+        [src]="imgResource ? imgResource : 'assets/img/png/userDefault.png'"
+      />
+    </div>
+
+    <div class="profile__info">
+      <div class="profile__info--sections">
+        <div
+          style="color: var(--dark)"
+          class="o-font-family--poppins-bold o-font-size--sub-text"
+        >
+          Pasatiempo:
+        </div>
+        <div *ngIf="userHobbies.length === 1; else isMore">
+          <div
+            style="color: var(--dark)"
+            class="o-font-family--poppins o-font-size--normal"
+          >
+            {{ userHobbies[0] }}
+          </div>
+        </div>
+        <ng-template #isMore>
+          <button (click)="userHobbies.length == 0 ? null : openDialog()" class="btn-view-all o-font-family--poppins" mat-button>
+            {{ userHobbies.length == 0 ? 'No seleccionados' : 'Ver todos...'}}
+          </button>
+        </ng-template>
+      </div>
+      <div class="profile__info--sections">
+        <div
+          style="color: var(--dark)"
+          class="o-font-family--poppins-bold o-font-size--sub-text"
+        >
+          Edad:
+        </div>
+        <div
+          style="color: var(--dark)"
+          class="o-font-family--poppins o-font-size--sub-text"
+        >
+          {{ userBirthday + " años" }}
+        </div>
+      </div>
+      <div class="profile__info--sections">
+        <div
+          style="color: var(--dark)"
+          class="o-font-family--poppins-bold o-font-size--sub-text"
+        >
+          {{document.length == 11 ? 'Carnet:' : 'DUI:' }}
+        </div>
+        <div
+          style="color: var(--dark)"
+          class="o-font-family--poppins o-font-size--sub-text"
+        >
+          {{ document }}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="profile__form">
+    <div style="width: 100%">
+      <div
+        class="profile__form--title o-font-family--poppins o-font-size--sub-title"
+      >
+        <div>Mis Pokémon</div>
+        <div class="profile__btn--edit">
+          <img src="assets/img/svg/edit.svg" alt="" />
+          <button (click)="goToDashboard()" class="o-font-family--poppins-bold">
+            Editar
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="dashboard__content">
+      <div class="example-viewport" itemSize="60">
+        <div class="dashboard">
+          <ng-container *ngFor="let poke of dataSelectedPokemons">
+            <div class="dashboard__card">
+              <div class="dashboard__card-info">
+                <div>
+                  <img
+                    class="dashboard__img"
+                    [src]="poke.sprites.other?.home?.front_default"
+                    alt=""
+                  />
+                </div>
+                <div
+                  class="o-font-family--poppins-Extrabold o-font-size--title-II"
+                >
+                  {{ poke.name | titlecase }}
+                </div>
+                <div>
+                  <span
+                    class="o-font-family--poppins o-font-size--normal"
+                    *ngFor="let item of poke.types; let last = last"
+                  >
+                    {{ item.type.name | titlecase }}{{ !last ? " / " : "" }}
+                  </span>
+                </div>
+              </div>
+              <div class="dashboard__card-info dashboard__card-info--stats">
+                <div *ngFor="let stat of poke.stats" class="dashboard__card-info--stat">
+                  <div class="o-font-family--poppins" >{{ stat.stat.name | titlecase }}</div>
+                  <div class="dashboard__card-info--bar o-font-family--poppins o-font-size--normal">
+                    <app-progress-bar
+                      [color]="poke.color?.name || 'blue'"
+                      [maxValue]="getMaxValue(poke, stat.stat.name)"
+                      [currentValue]="stat.base_stat"
+                    ></app-progress-bar>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

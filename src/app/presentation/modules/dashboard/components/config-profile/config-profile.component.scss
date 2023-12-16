@@ -1,0 +1,60 @@
+input.profile__upload--btn {
+  display: flex;
+  background-color: transparent !important;
+}
+
+.file-reader {
+  width: 340px;
+  box-sizing: border-box;
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  height: 70px;
+  padding: 23px 23px 23px 25px;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--background);
+  border-radius: 10px;
+  border: 1px dashed var(--blue-gray);
+
+  input {
+    cursor: pointer;
+    top: 0;
+    right: 0;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    z-index: 10;
+    background-color: transparent;
+  }
+
+  .label {
+    width: 100%;
+    color: var(--light-blue);
+  }
+}
+
+.file__btn {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.custom-outline-field {
+  width: 100% !important;
+  height: 70px !important;
+  border-radius: 10px !important;
+}
+
+.custom-outline-field-over {
+  width: 485px !important;
+  height: 70px !important;
+  border-radius: 10px !important;
+}
+
+.overflow {
+  padding-top: 6px;
+  min-height: 100px;
+  overflow-y: auto;
+}

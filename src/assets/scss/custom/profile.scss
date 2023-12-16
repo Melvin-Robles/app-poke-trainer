@@ -1,0 +1,138 @@
+.profile__header{
+
+  display: flex;
+  justify-content: flex-start;
+
+  flex-direction: column;
+}
+
+.profile__btn--back{
+  display: flex;
+  cursor: pointer;
+}
+
+.profile__btn--edit{
+display: flex;
+width: 134px;
+height: 30px;
+justify-content: space-between;
+align-items: center;
+border-radius: 10px;
+border: 1px solid var(--blue-btn);
+background-color: var(--background);
+padding: 2px;
+cursor: pointer;
+
+button{
+  background-color: transparent;
+  cursor: pointer;
+  width: 100%;
+  color: var(--blue-btn);
+}
+
+img{
+  position: relative;
+  left: 10px;
+  width: 25px;
+}
+
+}
+
+.profile__text--normal{
+  position: relative;
+  left: 25px;
+}
+
+
+.profile__main{
+  width: 100%;
+  padding: 40px;
+  display: flex;
+  justify-content: space-around;
+
+}
+
+.profile__card{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  width: 400px;
+  height: 600px;
+  padding: 40px;
+  border-radius: 50px;
+  background-color: var(--yellow);
+  margin-right: 100px;
+}
+
+.profile__card--img{
+width: 269px;
+height: 269px;
+border-radius: 50%;
+display: flex;
+align-items: center;
+justify-content: center;
+}
+
+.profile__card--img img{
+  border: 10px solid var(--background);
+  object-fit: cover;
+  max-width: 269px;
+  max-height: 269px;
+  border-radius: 50%;
+
+}
+
+input.profile__upload--btn{
+
+  display: flex;
+  background-color: transparent !important;
+}
+
+.profile__form{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  width: 490px;
+  height: auto;
+}
+
+.profile__form--title{
+  color: var(--blue)
+}
+
+.profile__info{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 100%;
+  gap: 8px;
+
+  &--sections{
+    display: flex;
+    justify-content: space-between;
+
+  }
+
+}
+
+.custom-outline-field {
+  width: 100% !important;
+  height: 70px !important;
+  border-radius: 10px !important;
+}
+
+.custom-outline-field-over {
+  width: 485px !important;
+  height: 70px !important;
+  border-radius: 10px !important;
+}
+
+
+
+
+
+
+

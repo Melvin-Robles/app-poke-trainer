@@ -1,0 +1,21 @@
+.loader__container{
+  height: 80vh;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  &--text{
+    position: relative;
+    bottom: 20px;
+  }
+
+  img{
+    width: 385px;
+    height: 270px;
+  }
+
+}
+
+

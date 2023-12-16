@@ -1,0 +1,19 @@
+button.o-btn {
+  padding: 10px;
+  width: 200px;
+  height: 60px;
+  cursor: pointer;
+  transition: 0.5s;
+  border-radius: 10px;
+  font-size: 18px;
+  font-weight: 600;
+
+  &-primary-btn {
+    color: var(--background);
+    background-color: var(--blue);
+  }
+  &-primary-btn--disabled {
+    color: var(--neutro-gray);
+    background-color: var(--white-gray) !important;
+  }
+}

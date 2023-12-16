@@ -1,0 +1,108 @@
+.dashboard__searchbar {
+  width: 100%;
+  height: 40px;
+  display: flex;
+  justify-content: space-between;
+  background-color: var(--light-gray);
+  border-radius: 10px;
+}
+
+input.search {
+  width: 100%;
+  height: 100%;
+  background-color: transparent !important;
+}
+
+/* Quitar el borde negro al hacer clic en un input */
+input:focus {
+  outline: none !important;
+  /* Esto elimina el borde de enfoque */
+}
+
+input::placeholder {
+  font-family: "poppins-bold" !important;
+}
+
+.search__img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+}
+
+.search__bar {
+  width: 100%;
+}
+
+.dashboard__content {
+  width: 100%;
+  height: 700px;
+}
+
+.profile__form {
+  max-height: 620px !important;
+  width: 600px !important;
+}
+
+.example-viewport {
+  height: 100%;
+  width: 100%;
+}
+
+.dashboard {
+  padding: 10px;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 30px;
+  height: 420px;
+  overflow-y: auto !important;
+}
+
+.dashboard__card {
+  width: 165px;
+  height: 105px;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+
+  background-color: var(--light-gray);
+
+  &--tittle {
+    width: 340x;
+    height: 25px;
+    padding: 6px 15px;
+    border-radius: 10px;
+    background-color: var(--blue);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2px;
+    box-shadow: 0px 2.767px 2.214px 0px rgba(0, 0, 0, 0.03),
+      0px 6.65px 5.32px 0px rgba(0, 0, 0, 0.04),
+      0px 12.522px 10.017px 0px rgba(0, 0, 0, 0.05),
+      0px 22.336px 17.869px 0px rgba(0, 0, 0, 0.06),
+      0px 41.778px 33.422px 0px rgba(0, 0, 0, 0.07),
+      0px 100px 80px 0px rgba(0, 0, 0, 0.1);
+  }
+}
+
+.dashboard__img img {
+  width: 90px;
+  height: 90px;
+  position: relative;
+  bottom: 10px;
+}
+
+.disabled {
+  pointer-events: none;
+  opacity: 0.5;
+  /* Puedes ajustar esto según tus preferencias visuales */
+}
+
+.selected {
+  background-color: var(--yellow);
+  /* Ajusta este valor según tu preferencia */
+}

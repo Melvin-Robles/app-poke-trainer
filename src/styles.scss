@@ -1,1 +1,18 @@
-/* You can add global styles to this file, and also import other style files */
+
+*{
+  margin: 0;
+  border: 0;
+  box-sizing: border-box;
+}
+
+@import 'assets/scss/font-resource';
+@import 'assets/scss/enviroments';
+@import 'assets/scss/objects/font-family';
+@import 'assets/scss/objects/font-size';
+@import 'assets/scss/objects/buttons';
+@import 'assets/scss/custom/profile.scss';
+@import 'assets/scss/custom/customTags.scss';
+@import 'assets/scss/custom/scrollbar.scss';
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

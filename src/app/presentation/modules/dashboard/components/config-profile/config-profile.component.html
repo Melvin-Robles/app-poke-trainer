@@ -1,0 +1,185 @@
+<ng-container *ngIf="!hasLoad; else content">
+  <app-loader></app-loader>
+</ng-container>
+
+<ng-template #content>
+  <div class="profile__header">
+    <div class="profile__btn--back">
+      <img src="assets/img/svg/arrow_back.svg" alt="" />
+      <div
+        (click)="goToHome()"
+        class="o-font-size--sub-title o-font-family--poppins-bold"
+      >
+        <span
+          style="color: var(--blue)"
+          class="o-font-family--poppins-Extrabold"
+          >¡Hola!</span
+        >
+        <span style="color: var(--blue)" class="">
+          Configuremos tu perfil
+        </span>
+      </div>
+    </div>
+    <div
+      style="color: var(--neutro-gray)"
+      class="o-font-size--normal o-font-family--poppins profile__text--normal"
+    >
+      Queremos conocerte mejor.
+    </div>
+  </div>
+  <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+    <div class="profile__main">
+      <div class="profile__card">
+        <div
+          class="profile__card--title o-font-family--poppins o-font-size--sub-title"
+        >
+          Imágen perfil
+        </div>
+        <div class="profile__card--img">
+          <img [src]="urlImage ? urlImage : 'assets/img/png/userDefault.png'" />
+        </div>
+
+        <div class="file-reader">
+          <input
+            formControlName="file"
+            type="file"
+            (change)="onFileChanged($event)"
+          />
+          <button
+            type="button"
+            pButton
+            class="label"
+            style="background-color: transparent !important"
+          >
+            <div class="file__btn">
+              <span class="text-lg">
+                {{ imageSelect ? imageSelect.name : "Adjunta una foto" }}</span
+              >
+              <span>
+                <img src="assets\img\svg\cloud_upload.svg" width="35px" />
+              </span>
+            </div>
+          </button>
+        </div>
+      </div>
+
+      <div class="profile__form">
+        <div>
+          <div
+            class="profile__form--title o-font-family--poppins o-font-size--sub-title"
+          >
+            Tu información
+          </div>
+          <div
+            style="color: var(--neutro-gray)"
+            class="profile__form--text o-font-size--normal o-font-family--poppins"
+          >
+            Completa la siguiente información para completar tu perfil
+          </div>
+        </div>
+
+        <mat-form-field appearance="outline" class="custom-outline-field">
+          <mat-label>Nombre</mat-label>
+          <input
+            type="text"
+            matInput
+            formControlName="name"
+            oninput="this.value = this.value.replace(/[^a-zA-Z\s]/g, '')"
+          />
+        </mat-form-field>
+
+        <div class="overflow">
+          <form>
+            <mat-form-field
+              class="example-chip-list custom-outline-field-over"
+              appearance="outline"
+            >
+              <mat-label>Pasatiempo favorito</mat-label>
+              <mat-chip-grid #chipGrid aria-label="Fruit selection">
+                <mat-chip-row
+                  *ngFor="let hobbie of hobbies"
+                  (removed)="remove(hobbie)"
+                >
+                  {{ hobbie }}
+                  <button matChipRemove [attr.aria-label]="'remove ' + hobbie">
+                    <mat-icon>cancel</mat-icon>
+                  </button>
+                </mat-chip-row>
+              </mat-chip-grid>
+              <input
+                formControlName="time"
+                class="over"
+                placeholder="Agregar Pasatiempo..."
+                #hobbieInput
+                [matChipInputFor]="chipGrid"
+                [matAutocomplete]="auto"
+                [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                (matChipInputTokenEnd)="add($event)"
+              />
+              <mat-autocomplete
+                #auto="matAutocomplete"
+                (optionSelected)="selected($event)"
+              >
+                <mat-option
+                  *ngFor="let hobbie of filteredHobbies | async"
+                  [value]="hobbie"
+                >
+                  {{ hobbie }}
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+          </form>
+        </div>
+
+        <mat-form-field class="custom-outline-field" appearance="outline">
+          <mat-label>Cumpleaños</mat-label>
+          <input
+            readonly="true"
+            formControlName="birthday"
+            matInput
+            [matDatepicker]="picker"
+          />
+          <mat-datepicker-toggle
+            matIconSuffix
+            [for]="picker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+
+          <mat-error
+            *ngIf="profileForm.get('birthday')!.hasError('fechaFutura')"
+          >
+            No se puede seleccionar una fecha futura.
+          </mat-error>
+
+          <mat-error *ngIf="profileForm.get('birthday')!.hasError('mismoAnio')">
+            No se puede seleccionar una fecha del año actual.
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="custom-outline-field">
+          <mat-label
+            >{{ personAdult ? "DUI" : "Carnet de minoridad" }}
+          </mat-label>
+          <input
+          (keydown)="onKeyDown($event)"
+            placeholder="Documento"
+            type="text"
+            oninput="this.value = this.value.replace(/[^0-9-]/g, '')"
+            formControlName="document"
+            matInput
+          />
+        </mat-form-field>
+
+        <button
+          [class.o-btn-primary-btn]="profileForm.valid"
+          [ngClass]="{ 'o-btn-primary-btn--disabled': !profileForm.valid }"
+          class="o-btn"
+          type="submit"
+          [disabled]="!profileForm.valid"
+        >
+          Continuar
+        </button>
+      </div>
+    </div>
+  </form>
+</ng-template>

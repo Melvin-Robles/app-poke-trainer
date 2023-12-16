@@ -1,0 +1,172 @@
+<ng-container *ngIf="!hasLoad; else content">
+  <app-loader [nameSection]="'Perfil'"></app-loader>
+</ng-container>
+
+<ng-template #content>
+  <div class="profile__header">
+    <div class="profile__btn--back">
+      <img
+        (click)="goToConfigure()"
+        src="assets/img/svg/arrow_back.svg"
+        alt=""
+      />
+      <div class="o-font-size--sub-title o-font-family--poppins-bold">
+        <span
+          style="color: var(--blue)"
+          class="o-font-family--poppins-Extrabold"
+          >¡Ya casi términamos!</span
+        >
+      </div>
+    </div>
+    <div
+      style="color: var(--neutro-gray)"
+      class="o-font-size--normal o-font-family--poppins profile__text--normal"
+    >
+      Revisa la información, y completa lo solicitado.
+    </div>
+  </div>
+
+  <div class="profile__main">
+    <div class="profile__card">
+      <div
+        class="profile__card--title o-font-family--poppins o-font-size--title o-font-family--poppins-Extrabold"
+      >
+        {{ userName }}
+      </div>
+      <div class="profile__card--img">
+        <img
+          [src]="imgResource ? imgResource : 'assets/img/png/userDefault.png'"
+        />
+      </div>
+
+      <div class="profile__info">
+        <div class="profile__info--sections">
+          <div
+            style="color: var(--dark)"
+            class="o-font-family--poppins-bold o-font-size--sub-text"
+          >
+            Pasatiempo:
+          </div>
+          <div *ngIf="userHobbies.length === 1; else isMore">
+            <div
+              style="color: var(--dark)"
+              class="o-font-family--poppins o-font-size--normal"
+            >
+              {{ userHobbies[0] }}
+            </div>
+          </div>
+          <ng-template #isMore>
+            <button
+              class="btn-view-all o-font-family--poppins"
+              mat-button
+              (click)="userHobbies.length == 0 ? null : openDialog()"
+            >
+            {{ userHobbies.length == 0 ? 'No seleccionados' : 'Ver todos...'}}
+            </button>
+          </ng-template>
+        </div>
+        <div class="profile__info--sections">
+          <div
+            style="color: var(--dark)"
+            class="o-font-family--poppins-bold o-font-size--sub-text"
+          >
+            Edad:
+          </div>
+          <div
+            style="color: var(--dark)"
+            class="o-font-family--poppins o-font-size--sub-text"
+          >
+            {{
+              userBirthday == 1 ? userBirthday + " año" : userBirthday + " años"
+            }}
+          </div>
+        </div>
+        <div class="profile__info--sections">
+          <div
+            style="color: var(--dark)"
+            class="o-font-family--poppins-bold o-font-size--sub-text"
+          >
+          {{document.length == 11 ? 'Carnet:' : 'DUI:' }}
+          </div>
+          <div
+            style="color: var(--dark)"
+            class="o-font-family--poppins o-font-size--sub-text"
+          >
+          {{document}}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="profile__form">
+      <div style="width: 100%">
+        <div
+          class="profile__form--title o-font-family--poppins o-font-size--sub-title"
+        >
+          Pokémon
+        </div>
+        <div
+          style="color: var(--neutro-gray)"
+          class="profile__form--text o-font-size--normal o-font-family--poppins"
+        >
+          Selecciona 3 Pokémon para que sean parte de tu equipo
+        </div>
+      </div>
+
+      <div class="dashboard__searchbar">
+        <div class="search__img">
+          <img src="assets/img/png/search.png" alt="" />
+        </div>
+        <div class="search__bar">
+          <input
+            (input)="onSearch($event)"
+            class="search"
+            type="search"
+            placeholder="Buscar por índice, nombre..."
+          />
+        </div>
+      </div>
+
+      <div class="dashboard__content">
+        <div class="example-viewport" itemSize="60">
+          <div class="dashboard">
+            <ng-container *ngFor="let item of ResponsePokeEntity">
+              <div
+                (click)="toggleSelect(item)"
+                class="dashboard__card"
+                [class.disabled]="clickCounter === 3 && !isSelected(item)"
+                [class.selected]="isSelected(item)"
+              >
+                <div class="dashboard__img">
+                  <img
+                    [src]="item.sprites?.other?.home?.front_default"
+                    alt=""
+                  />
+                </div>
+
+                <div
+                  style="color: var(--background)"
+                  class="dashboard__card--tittle o-font-family--poppins-bold"
+                >
+                  <div>{{ "#" + item.id }}</div>
+                  <div>{{ item.name }}</div>
+                </div>
+              </div>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+
+      <button
+        (click)="goToProfileComplete()"
+        [class.o-btn-primary-btn]="validButton"
+        [ngClass]="{ 'o-btn-primary-btn--disabled': !validButton }"
+        class="o-btn"
+        type="submit"
+        [disabled]="!validButton"
+      >
+        Guardar
+      </button>
+    </div>
+  </div>
+</ng-template>
