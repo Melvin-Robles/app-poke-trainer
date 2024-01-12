@@ -22,6 +22,7 @@ export class ConfigProfileComponent {
   public base64Image: string | null = null;
   public urlImage: string | null = null;
   public user: UserInfo | null = null;
+  public hobbie!: string[];
   public profileForm!: FormGroup;
   public personAdult!: boolean;
   public hasLoad: boolean = true;
@@ -67,19 +68,26 @@ export class ConfigProfileComponent {
       this.user = user;
     }
 
-    this._initForm(this.urlImage!, this.user?.name, this.user?.document);
+    const userHobbies: string[] = this._sessionStorageService.getValue('userHobbies')!
+    if (typeof userHobbies === 'object') {
+      this.hobbie = userHobbies;
+    }
+
+    this._initForm(this.urlImage!, this.user?.name, this.hobbie);
     this.subscribeToFormChanges();
 
   }
 
-  private _initForm(file?:string, name?:string, docu?:string) {
+  private _initForm(file?:string, name?:string, hobbies?: string[]) {
     this.profileForm = this.fb.group({
       file: [ file ? file : '', Validators.required],
       name: [name ? name : '', [Validators.required, Validators.pattern(/^[a-zA-Z\s]+$/)]],
       birthday: ['', [Validators.required, this.dateValidator]],
-      document: [{ value: docu ? docu : '', disabled: true }],
+      document: [{ value: '', disabled: true }],
       time: [''],
     });
+
+
 
     this.profileForm.get('birthday')?.valueChanges.subscribe(() => {
       this.updateDocumentValidation();
@@ -100,6 +108,11 @@ export class ConfigProfileComponent {
             ?.setValue(currentValue.slice(0, 10), { emitEvent: false });
         }
       });
+
+      if(hobbies){
+
+        this.hobbies.push(...hobbies);
+      }
   }
 
   updateDocumentValidation() {

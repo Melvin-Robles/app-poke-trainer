@@ -80,13 +80,19 @@
           style="color: var(--dark)"
           class="o-font-family--poppins-bold o-font-size--sub-text"
         >
+        <span *ngIf="document; else notDocu">
+
           {{document.length == 11 ? 'Carnet:' : 'DUI:' }}
+        </span>
+        <ng-template #notDocu>
+          Documento
+        </ng-template>
         </div>
         <div
           style="color: var(--dark)"
           class="o-font-family--poppins o-font-size--sub-text"
         >
-          {{ document }}
+        {{document ? document : 'No ingresado'}}
         </div>
       </div>
     </div>

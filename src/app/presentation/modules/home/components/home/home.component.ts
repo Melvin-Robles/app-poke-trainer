@@ -18,6 +18,7 @@ export class HomeComponent {
   ngOnInit(): void {
     this._sessionStorageService.remove('userInfo');
     this._sessionStorageService.remove('userImage');
+    this._sessionStorageService.remove('userHobbies');
   }
 
   goToDasboard() {
